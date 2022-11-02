@@ -15,12 +15,6 @@ df['папа'] = df.iloc[:,5].map(lambda x:x[1]).replace({'ч':0,'к':1})
 df = df.drop(columns=['Родители (мама, папа) что пьют'])
 df.head()
 
-train_idx = np.random.choice(np.arange(19),size = 17,replace=False)
-test_idx = list(set(np.arange(19))  - set(train_idx))
-train = df.iloc[train_idx]
-test = df.iloc[test_idx]
-
-
 def search_drink_knn(train_df, new_object, k=5, type_norm=2):
     help_dict = {0: 'Чай', 1: 'Кофе'}
     train_df['close_neighbor'] = (np.linalg.norm(train_df.drop(columns=['К/Ч']) - new_object,ord=type_norm, axis=1))
