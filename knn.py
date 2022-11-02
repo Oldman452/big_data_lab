@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from warnings import filterwarnings
 import openpyxl
-filterwarnings("ignore")
+
 df = pd.read_excel('dataset.xlsx')
 
 dict_decode = {0:'чай',1:'кофе'}
@@ -28,9 +28,6 @@ def search_drink_knn(train_df, new_object, k=5, type_norm=2):
     return f'Человек с этими параметрами пьет: {help_dict[answer]}'
 
 
-print(search_drink_knn(train,test.iloc[0,[0,1,2,3,4,6,7]]))
-print('Указанное предпочтение',dict_decode[test.iloc[0,5]])
-
 time_sleep = int(input('Часы сна:'))
 work = int(input('Трудоустройство:'))
 weight = int(input('Вес:'))
@@ -46,6 +43,8 @@ print(search_drink_knn(df,input_data))
 print('Самое близкое расстояние',sorted(df.close_neighbor)[0])
 print(df.sort_values(by='close_neighbor'))
 
+print(search_drink_knn(train,test.iloc[0,[0,1,2,3,4,6,7]]))
+print('Указанное предпочтение',dict_decode[test.iloc[0,5]])
 
 sns.set_theme()
 sns.pairplot(data = df, hue = 'К/Ч')
